@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.com.ricardo.coroutinesmovies.main.viewmodel.MainViewModel
 import br.com.ricardo.coroutinesmovies.R
+import br.com.ricardo.coroutinesmovies.di.MainViewModelFactory
 import br.com.ricardo.coroutinesmovies.main.repository.MainRepository
 import br.com.ricardo.coroutinesmovies.main.repository.MainRepositoryImpl
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -30,8 +31,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, MainViewModel.MainViewModelFactory(MainRepositoryImpl()))
-            .get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this,
+            MainViewModelFactory(MainRepositoryImpl())).get(MainViewModel::class.java)
 
         viewModel.movieMutableLiveData.observe(viewLifecycleOwner, Observer { movies ->
             text_movie_title.text = movies[0].title
