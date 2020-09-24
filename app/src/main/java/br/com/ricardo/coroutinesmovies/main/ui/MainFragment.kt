@@ -1,19 +1,15 @@
 package br.com.ricardo.coroutinesmovies.main.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import br.com.ricardo.coroutinesmovies.main.viewmodel.MainViewModel
 import br.com.ricardo.coroutinesmovies.R
-import br.com.ricardo.coroutinesmovies.di.MainViewModelFactory
-import br.com.ricardo.coroutinesmovies.main.repository.MainRepository
-import br.com.ricardo.coroutinesmovies.main.repository.MainRepositoryImpl
+import br.com.ricardo.coroutinesmovies.main.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
@@ -21,7 +17,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -31,11 +27,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this,
-            MainViewModelFactory(MainRepositoryImpl())).get(MainViewModel::class.java)
+//        viewModel = ViewModelProvider(this,
+//            MainViewModelFactory(MainRepositoryImpl())).get(MainViewModel::class.java)
 
         viewModel.movieMutableLiveData.observe(viewLifecycleOwner, Observer { movies ->
-            text_movie_title.text = movies[0].title
+            text_movie_title.text = movies.map {
+                "${it.id} - ${it.title}"
+            }.toString()
         })
     }
 

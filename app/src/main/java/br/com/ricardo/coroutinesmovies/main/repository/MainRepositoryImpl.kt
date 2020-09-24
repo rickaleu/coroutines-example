@@ -22,10 +22,8 @@ class MainRepositoryImpl : MainRepository {
     override suspend fun getMoviesCoroutine(): List<Movie> {
         return withContext(Dispatchers.Default) {
             delay(3000)
-            listOf(
-                Movie(1, "Titulo 1"),
-                Movie(2, "Titulo 2")
-            )
+            listOf(Movie(1, "Titulo 1"),
+                Movie(2, "Titulo 2"))
         }
     }
 
