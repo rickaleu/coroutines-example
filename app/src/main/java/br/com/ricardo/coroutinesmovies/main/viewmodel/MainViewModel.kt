@@ -1,5 +1,6 @@
 package br.com.ricardo.coroutinesmovies.main.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.ricardo.coroutinesmovies.data.model.Movie
@@ -10,7 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainViewModel(private val repository: MainRepository) : ViewModel() {
+class MainViewModel(private val repository: MainRepository,
+                    private val context: Context
+) : ViewModel() {
 
     val movieMutableLiveData = MutableLiveData<List<Movie>>()
 
@@ -28,5 +31,7 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
             movieMutableLiveData.value = movies
         }
+
+
     }
 }

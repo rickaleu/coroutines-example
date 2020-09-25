@@ -1,5 +1,6 @@
 package br.com.ricardo.coroutinesmovies.di
 
+import android.content.Context
 import br.com.ricardo.coroutinesmovies.main.repository.MainRepository
 import br.com.ricardo.coroutinesmovies.main.repository.MainRepositoryImpl
 import br.com.ricardo.coroutinesmovies.main.viewmodel.MainViewModel
@@ -11,9 +12,10 @@ val mainModule = module {
         MainRepositoryImpl()
     }
 
-    viewModel {
+    viewModel { (context: Context) ->
         MainViewModel(
-            repository = get()
+            repository = get(),
+            context = context
         )
     }
 }
