@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.ricardo.coroutinesmovies.data.model.Movie
 import br.com.ricardo.coroutinesmovies.main.repository.MainRepository
+import br.com.ricardo.coroutinesmovies.main.repository.MainRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
